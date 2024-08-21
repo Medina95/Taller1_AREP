@@ -73,6 +73,8 @@ Para ejecutar las pruebas:
 - **Test03HandlePut**: Verifica que el método HandlePut actualice un dino y devuelva una respuesta JSON correcta para una solicitud  PUT y Verifica que el servidor responda con un código de estado HTTP 200, pues devuelve los datos actualizados.
 - **Test04HandleDelete**: Verifica que el método HandleDelete elimine un dino y devuelva una respuesta JSON correcta para una solicitud  DELETE y Verifica que el servidor responda con un código de estado HTTP 200, pues devuelve los datos actualizados.
 
+    ![Pagina](src/ReadmeImages/test.png)
+
 
 
 ## Built With
