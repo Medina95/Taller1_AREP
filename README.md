@@ -1,87 +1,85 @@
-# Project Title
+# TALLER DISEÑO Y ESTRUCTURACIÓN DE APLICACIONES DISTRIBUIDAS EN INTERNET
 
-One Paragraph of project description goes here
 
-## Getting Started
+Este proyecto implementa un servidor web básico en Java que maneja solicitudes RESTful (GET, POST, PUT, DELETE) y sirve archivos estáticos. El servidor está diseñado para manejar múltiples conexiones de clientes simultáneamente y realizar operaciones CRUD en objetos JSON en memoria. Cada solicitud es manejada por un hilo separado (ClientHandler), permitiendo la concurrencia. El tema que se escogio para la pagina web es de dinosaurios :D. 
+ ![Pagina](src/ReadmeImages/paginita.png)
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+ ## Arquitectura
+ Este proyecto sigue la arquitectura cliente-servidor. Los clientes envían solicitudes HTTP al servidor, que maneja la lógica de los serviciso REST y devuelve respuestas en formato JSON. El servidor también puede servir archivos estáticos, como HTML, CSS e imágenes.
 
-### Prerequisites
+ ### componentes  
+   - **Servidor** : SimpleWebServer maneja las conexiones y enruta las solicitudes a los servicios correspondientes. ClientHandler Gestiona la comunicación con el cliente, procesa la solicitud y decide si debe servir un archivo estático o delegar la solicitud a un servicio REST.
+   - **Servicios REST**: Implementados en la clase RestServiceImpl, manejan operaciones CRUD en objetos JSON.
+   - **Archivos estáticos**: Servidos desde el directorio webroot
 
-What things you need to install the software and how to install them
 
-```
-Give examples
-```
+## Primeros Pasos
+Estas instrucciones le permitirán obtener una copia del proyecto en funcionamiento en su máquina local para fines de desarrollo y prueba. 
 
-### Installing
 
-A step by step series of examples that tell you how to get a development env running
+### Requisitos Previos
+Para ejecutar este proyecto, necesitarás tener instalado:
 
-Say what the step will be
+- Java JDK 8 o superior.
+- Un IDE de Java como IntelliJ IDEA, Eclipse, o NetBeans.
+- Maven para manejar las dependencias 
+- Un navegador web para interactuar con el servidor.
 
-```
-Give the example
-```
+### Instalación 
 
-And repeat
+1. Tener instalado Git en tu maquina local 
+2. Elegir una carpeta en donde guardes tu proyecto
+3. abrir la terminal de GIT --> mediante el clik derecho seleccionas Git bash here
+4. Clona el repositorio en tu máquina local:
+   ```bash
+   git clone https://github.com/Medina95/Taller1_AREP.git
+   ```
+5. Abre el proyecto con tu IDE favorito o navega hasta el directorio del proyecto 
+6. Desde la terminal  para compilar el proyecto ejecuta:
 
-```
-until finished
-```
+   ```bash
+   mvn clean install
+   ```
+7. compila el proyecto  que contiene el metodo MAIN: SimpleWebServer.java o ejecuta desde la terminal
 
-End with an example of getting some data out of the system or using it for a little demo
+   ```bash
+    java -cp target/miprimera-app-1.0-SNAPSHOT.jar SimpleWebServer
+   ```
+   Vera que el servidor esta listo y corriendo sobre el puerto 8080
+8. Puedes Ingresar desde el navegador a  la pagina:
+    http://localhost:8080/index.html
+9. Puedes interactuar con los endpoints RESTful (/api):
+   - GET = http://localhost:8080/api/dinosaurios
+   - POST= http://localhost:8080/api/dinosaurio
+   - PUT=  http://localhost:8080/api/dinosaurio/1
+   - DELETE= http://localhost:8080/api/dinosaurio/1
 
-## Running the tests
+    Utilizando herramientas como Postman, para el POST/PUT/DELETE te vas a la parte de body -> raw -> verificas el formato JSON y agregas un dino asi 
+    - {"Dinosaurio":"Brachiosaurus"}
+    ![Dinosaurio](src/ReadmeImages/image.png)
+## Ejecutar las pruebas
 
-Explain how to run the automated tests for this system
+Se implementaron pruebas unitarias para los métodos de manejo de solicitudes HTTP (GET, POST, PUT, DELETE) en el servidor. Estas pruebas se realizaron utilizando JUnit y Mockito para simular las solicitudes y validar las respuestas.
 
-### Break down into end to end tests
+Para ejecutar las pruebas:  
+1. Desde tu IDE, ejecuta las clase AppTest.java o desde la terminal ejecutas:
+   ```bash
+   mvn test
+   ```
+### Desglosar en pruebas de extremo a extremo
 
-Explain what these tests test and why
+- **Test01HandleGet**: Verifica que el método handleGet devuelve una respuesta JSON correcta para una solicitud GET y Verifica que el servidor responda con un código de estado HTTP 200 OK.
+- **Test02HandlePost**: Verifica que el método HandlePost agrege un dino y devuelva una respuesta JSON correcta para una solicitud POST y Verifica que el servidor responda con un código de estado HTTP 201 Created
+- **Test03HandlePut**: Verifica que el método HandlePut actualice un dino y devuelva una respuesta JSON correcta para una solicitud  PUT y Verifica que el servidor responda con un código de estado HTTP 200, pues devuelve los datos actualizados.
+- **Test04HandleDelete**: Verifica que el método HandleDelete elimine un dino y devuelva una respuesta JSON correcta para una solicitud  DELETE y Verifica que el servidor responda con un código de estado HTTP 200, pues devuelve los datos actualizados.
 
-```
-Give an example
-```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
-## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* **Carolina Medina Acero** -  [Medina95](https://github.com/Medina95)

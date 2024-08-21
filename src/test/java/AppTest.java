@@ -95,7 +95,6 @@ public class AppTest {
     // Ejecutar el método
     restService.handlePost(bufferedReader, mockOutputStream);
 
-
         // Capturar los argumentos que se pasaron a mockOutputStream.write()
         ArgumentCaptor<byte[]> argumentCaptor = ArgumentCaptor.forClass(byte[].class);
         verify(mockOutputStream, times(2)).write(argumentCaptor.capture());
@@ -109,8 +108,7 @@ public class AppTest {
 
         // Verificar el contenido del JSON
         assertTrue(jsonResponse.contains("[{ \"id\": 1, \"status\": \"Dino received\", \"Dinosaurio\": \"Triceratops\" }]"));
-
-}
+    }
     /**
      *Verifica que el método HandlePut actualice un dino y devuelva una respuesta JSON correcta para una solicitud PUT.
      * Verifica que el servidor responda con un código de estado HTTP 200, pues devuelve los datos actualizados
@@ -149,7 +147,7 @@ public class AppTest {
     }
 
     /**
-     *Verifica que el método HandleDelete elimine un dino y devuelva una respuesta JSON correcta para una solicitud PUT.
+     *Verifica que el método HandleDelete elimine un dino y devuelva una respuesta JSON correcta para una solicitud DELETE.
      * Verifica que el servidor responda con un código de estado HTTP 200, pues devuelve los datos actualizados
      * @throws IOException  Si ocurre un error de entrada/salida durante la comunicación HTTP.
      */
