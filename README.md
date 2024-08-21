@@ -10,7 +10,7 @@ Este proyecto implementa un servidor web básico en Java que maneja solicitudes 
  ### componentes  
    - **Servidor** : SimpleWebServer maneja las conexiones y enruta las solicitudes a los servicios correspondientes. ClientHandler Gestiona la comunicación con el cliente, procesa la solicitud y decide si debe servir un archivo estático o delegar la solicitud a un servicio REST.
    - **Servicios REST**: Implementados en la clase RestServiceImpl, manejan operaciones CRUD en objetos JSON.
-   - **Archivos estáticos**: Servidos desde el directorio webroot
+   - **Archivos estáticos**: Almacenados en el directorio webroot
 
 
 ## Primeros Pasos
