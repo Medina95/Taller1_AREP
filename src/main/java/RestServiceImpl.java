@@ -7,10 +7,22 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Implementación de los servicios REST para el servidor web.
+ * Maneja solicitudes HTTP GET/POST/PUT/DELETE.
+ */
 public class RestServiceImpl implements RESTService {
     private static List<String> jsonResponses = new ArrayList<>();
     private static int currentId = 1;
+      /**
+     * Maneja una solicitud HTTP GET.
+     *
+     * @param requestLine Una matriz de cadenas que contiene la línea de solicitud, dividida por espacios.
+     * @param in BufferedReader para leer datos de la solicitud.
+     * @param out  OutputStream para enviar la respuesta al cliente.
+     * @param clientSocket El Socket del cliente, utilizado para obtener información adicional si es necesario.
+     * @throws IOException Si ocurre un error al leer la solicitud o al escribir la respuesta.
+     */
     @Override
     public void handleGet(String[] requestLine, BufferedReader in, OutputStream out, Socket clientSocket) throws IOException {
              // Combinar todas las respuestas JSON en una sola
@@ -20,7 +32,13 @@ public class RestServiceImpl implements RESTService {
              sendJsonResponse(out,200, combinedJsonResponse);
     }
 
-
+ /**
+     * Maneja una solicitud HTTP POST.
+     *
+     * @param in Un flujo de entrada de {@link BufferedReader} para leer datos del cuerpo de la solicitud.
+     * @param out Un flujo de salida {@link OutputStream} para enviar la respuesta al cliente.
+     * @throws IOException Si ocurre un error al leer la solicitud o al escribir la respuesta.
+     */
     public void handlePost(BufferedReader in, OutputStream out) throws IOException {
         // Leer los encabezados adicionales
         String line;
@@ -53,7 +71,14 @@ public class RestServiceImpl implements RESTService {
         // Enviar la respuesta combinada
         sendJsonResponse(out,201, combinedJsonResponse);
     }
-    
+      /**
+     * Maneja una solicitud HTTP DELETE a traves de un ID 
+     *
+     * @param in Un flujo de entrada de {@link BufferedReader} para leer datos de la solicitud.
+     * @param out Un flujo de salida {@link OutputStream} para enviar la respuesta al cliente.
+     * @param id El ID del Dinosaurio que se está eliminando.
+     * @throws IOException Si ocurre un error al leer la solicitud o al escribir la respuesta.
+     */
     @Override
     public void handleDelete(BufferedReader in, OutputStream out, int id) throws IOException {
         // Implementación similar a GET o POST
@@ -74,6 +99,14 @@ public class RestServiceImpl implements RESTService {
         sendJsonResponse(out,200, combinedJsonResponse);   
     }
 
+     /**
+     * Maneja una solicitud HTTP PUT atraves de un ID
+     *
+     * @param in Un flujo de entrada de {@link BufferedReader} para leer datos del cuerpo de la solicitud.
+     * @param out Un flujo de salida {@link OutputStream} para enviar la respuesta al cliente.
+     * @param id El ID del Dinosaurio que se está actualizando.
+     * @throws IOException Si ocurre un error al leer la solicitud o al escribir la respuesta.
+     */
     @Override
     public void handlePut(BufferedReader in, OutputStream out,int id) throws IOException {
           // Leer los encabezados adicionales
@@ -121,7 +154,14 @@ public class RestServiceImpl implements RESTService {
         sendJsonResponse(out,200, combinedJsonResponse);   
 
     }
- 
+     /**
+     * Envía una respuesta JSON al cliente.
+     *
+     * @param out El flujo de salida {@link OutputStream} para enviar la respuesta.
+     * @param statusCode El código de estado HTTP para la respuesta.
+     * @param jsonResponse El cuerpo de la respuesta en formato JSON.
+     * @throws IOException Si ocurre un error al escribir la respuesta.
+     */ 
 
     private void sendJsonResponse(OutputStream out, int statusCode, String jsonResponse) throws IOException {
         String statusText;
@@ -153,6 +193,15 @@ public class RestServiceImpl implements RESTService {
         out.write(responseHeader.getBytes());
         out.write(jsonResponse.getBytes());
     }
+
+
+      /**
+     * Extrae el valor asociado con una clave específica de un objeto JSON en formato de cadena.
+     *
+     * @param jsonString El objeto JSON como una cadena de texto.
+     * @param key La clave cuyo valor se desea extraer.
+     * @return El valor asociado con la clave, o {@code null} si la clave no se encuentra.
+     */
     public static String extractValue(StringBuilder jsonString, String key) {
         // Encontrar la posicion de la clave
         int startIndex = jsonString.indexOf("\"" + key + "\":\"") + key.length() + 4;
