@@ -5,7 +5,7 @@ Este proyecto implementa un servidor web básico en Java que maneja solicitudes 
  ![Pagina](src/ReadmeImages/paginita.png)
 
  ## Arquitectura
- Este proyecto sigue la arquitectura cliente-servidor. Los clientes envían solicitudes HTTP al servidor, que maneja la lógica de los serviciso REST y devuelve respuestas en formato JSON. El servidor también puede retornar archivos estáticos, como HTML, CSS e imágenes.
+ Este proyecto sigue la arquitectura cliente-servidor. Utilizando el estilo arquitectonico de REST, Los clientes envían solicitudes HTTP al servidor, que maneja la lógica de los serviciso REST y devuelve respuestas en formato JSON. El servidor también puede retornar archivos estáticos, como HTML, CSS e imágenes. 
 
  ### componentes  
    - **Servidor** : SimpleWebServer maneja las conexiones y enruta las solicitudes a los servicios correspondientes. ClientHandler Gestiona la comunicación con el cliente, procesa la solicitud y decide si debe retornar un archivo estático o delegar la solicitud a un servicio REST.
